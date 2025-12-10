@@ -1,16 +1,16 @@
-HELP.md
+# Gradle
+.gradle
 build/
-!**/src/main/**
-!**/src/test/**
 
-### IntelliJ IDEA ###
+# IntelliJ IDEA
 .idea
 *.iws
 *.iml
 *.ipr
+out/
 
-### Gradle ###
-.gradle /
-
-### Logs ###
+# Logs
 *.log
+
+# MacOS
+.DS_Store
