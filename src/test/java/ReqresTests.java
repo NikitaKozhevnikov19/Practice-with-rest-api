@@ -14,19 +14,20 @@ public class ReqresTests {
 
     @BeforeAll
     public static void setup() {
-        RestAssured.baseURI = "https://reqres.in/api";
+        RestAssured.baseURI = "https://reqres.in";
+        RestAssured.basePath = "/api";
         header = new Header("x-api-key", "reqres_0f50984334cd42ac8b996d73df03cff2");
     }
 
-    // 1. Проверяем GET /api/users?page=2
     @Test
     void getUsersTest() {
         given()
                 .header(header)
+                .queryParam("page", 2)
                 .log().uri()
                 .log().headers()
                 .when()
-                .get("/users?page=2")
+                .get("/users")
                 .then()
                 .log().status()
                 .log().body()
@@ -34,7 +35,6 @@ public class ReqresTests {
                 .body("page", equalTo(2));
     }
 
-    // 2. Проверяем GET /api/users/2
     @Test
     void getUserByIdTest() {
         given()
@@ -42,7 +42,7 @@ public class ReqresTests {
                 .log().uri()
                 .log().headers()
                 .when()
-                .get("/users/2")
+                .get("/users/{id}", 2)
                 .then()
                 .log().status()
                 .log().body()
@@ -50,14 +50,13 @@ public class ReqresTests {
                 .body("data.id", equalTo(2));
     }
 
-    // 3. Проверяем успешную POST /api/register
     @Test
     void registerUserTest() {
         String body = """
-                    {
-                        "email": "eve.holt@reqres.in",
-                        "password": "pistol"
-                    }
+                {
+                    "email": "eve.holt@reqres.in",
+                    "password": "pistol"
+                }
                 """;
 
         given()
@@ -75,8 +74,6 @@ public class ReqresTests {
                 .body("token", notNullValue());
     }
 
-
-    // 4. Проверяем неуспешную POST /api/register
     @Test
     void unsuccessfulRegisterTest() {
         String body = """
@@ -100,15 +97,13 @@ public class ReqresTests {
                 .body("error", equalTo("Missing password"));
     }
 
-
-    // 5. Проверяем POST /api/users
     @Test
     void createUserTest() {
         String body = """
-                    {
-                        "name": "Tom",
-                        "job": "cleaner"
-                    }
+                {
+                    "name": "Tom",
+                    "job": "cleaner"
+                }
                 """;
 
         given()
