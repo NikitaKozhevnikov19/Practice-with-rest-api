@@ -171,7 +171,6 @@ API-тесты построены с использованием Layered Archit
 ```bash
 ./gradlew clean test
 ```
-
 ### ▶🔐 Запуск только Auth тестов
 ```bash
 ./gradlew clean test -Dgroups=auth
@@ -180,6 +179,14 @@ API-тесты построены с использованием Layered Archit
 ```bash
 ./gradlew clean test -Dgroups=users
 ```
+
+### 🔑 Настройка API Key (Reqres.in)
+Для работы API-тестов требуется актуальный ключ, так как бесплатный период часто истекает.
+1. Перейдите на [Reqres.in](https://reqres.in) и войдите в личный кабинет.
+2. Нажмите кнопку **Create API key** (или найдите его в Dashboard).
+3. Вставьте полученный ключ в файл `src/test/java/spec/ReqresSpecs.java` в заголовок `x-api-key`.
+
+
 # ⚙️ Запуск через Jenkins
 
 В Jenkins настроен параметризованный запуск.
