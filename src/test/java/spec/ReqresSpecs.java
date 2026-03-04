@@ -13,7 +13,7 @@ public class ReqresSpecs {
 
     public static RequestSpecification requestSpecification = new RequestSpecBuilder()
             .setContentType(JSON)
-            .addHeader("x-api-key", "reqres_e55e36d5f2f54397a8690b2a6aa325da")
+            .addHeader("x-api-key", "reqres_d8cad095ae5f49b3a4dccdecc92e8df8")
             .addFilter(withCustomTemplates())
             .log(LogDetail.ALL)
             .build();
